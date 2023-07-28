@@ -9,38 +9,38 @@ new Swiper('.best-item .swiper', {
     el: '.swiper-scrollbar',
   },
 });
+// const header = document.querySelector('.nav-wrap');
+// // const lastScrollTop = window.scrollY;
+// console.log(lastScrollTop)
+// function scrollEvent() {
+//   let lastScrollTop = 0;
+//   window.addEventListener('scroll', () => {
+//     let scrollTop = document.documentElement.scrollTop;
+//     if (scrollTop > lastScrollTop) {
+//       header.style.height = '0px';
+//     } else {
+//       header.style.height = '80px';
+//     }
+//   })
+// }
 
+// lastScrollTop = scrollTop
+let lastScrollTop = 0;
 
-let delta = 0;
-const header = document.querySelector('.nav-wrap');
-const navbarHeight = header.outerHeight();
+  window.addEventListener('scroll', function (event) {
+      let scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const header = document.querySelector('header');
 
-$(window).scroll(function(event) {
-  let didScroll = true;
-})
+      if (scrollTop > lastScrollTop) {
+          header.style.top = '-124px';
+      } else {
+          header.style.top = '-44px';
+      }
 
-setInterval(function() {
-  if(didScroll) {
-    hasScrolled();
-    didScroll = false;
-  }
-},250);
+      lastScrollTop = scrollTop;
 
-function hasScrolled() {
-  let st = $(this).scrollTop();
-  if(Math.abs(lastScrollTop - st) <= delta) {
-    return;
-  }
-}
-
-if((st > lastScrollTop) && (st > navbarHeight)) {
-  // scroll down
-  header.removeClass('nav-down').addClass('nav-up');
-} else {
-  //scroll up
-  if (st + $(window).height() < $(document).height()) {
-    header.removeClass('nav-up').addClass('nav-down');
-  }
-}
-
-lastScrollTop = st;
+      // 스크롤 위치가 0일 때 헤더를 화면 상단에 고정
+      if (scrollTop === 0) {
+          header.style.top = '0';
+      }
+  });
