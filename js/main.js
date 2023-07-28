@@ -9,38 +9,46 @@ new Swiper('.best-item .swiper', {
     el: '.swiper-scrollbar',
   },
 });
-// const header = document.querySelector('.nav-wrap');
-// // const lastScrollTop = window.scrollY;
-// console.log(lastScrollTop)
-// function scrollEvent() {
-//   let lastScrollTop = 0;
-//   window.addEventListener('scroll', () => {
-//     let scrollTop = document.documentElement.scrollTop;
-//     if (scrollTop > lastScrollTop) {
-//       header.style.height = '0px';
-//     } else {
-//       header.style.height = '80px';
-//     }
-//   })
-// }
 
-// lastScrollTop = scrollTop
 let lastScrollTop = 0;
 
-  window.addEventListener('scroll', function (event) {
-      let scrollTop = window.scrollY || document.documentElement.scrollTop;
-      const header = document.querySelector('header');
+window.addEventListener('scroll', function (event) {
+    let scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const header = document.querySelector('header');
 
-      if (scrollTop > lastScrollTop) {
-          header.style.top = '-124px';
-      } else {
-          header.style.top = '-44px';
-      }
+    if (scrollTop > lastScrollTop) {
+        header.style.top = '-124px';
+    } else {
+        header.style.top = '-44px';
+    }
 
-      lastScrollTop = scrollTop;
+    lastScrollTop = scrollTop;
 
-      // 스크롤 위치가 0일 때 헤더를 화면 상단에 고정
-      if (scrollTop === 0) {
-          header.style.top = '0';
-      }
-  });
+    // 스크롤 위치가 0일 때 헤더를 화면 상단에 고정
+    if (scrollTop === 0) {
+        header.style.top = '0';
+    }
+});
+
+
+// const observer = new IntersectionObserver((e) => {
+//   e.forEach(v, i) => {
+//     if (v.isIntersecting) {
+//       v.target.style.opacity = "1"
+//     }
+//   }
+// });
+
+const observer = new IntersectionObserver((e) => {
+  e.forEach((v, i) => {
+    if (v.isIntersecting) {
+      v.target.style.opacity = "1";
+    }
+  })
+})
+
+const fadeEls = document.querySelectorAll(".fade")
+
+fadeEls.forEach((fadeEl, i) => {
+  observer.observe(fadeEl);
+})
