@@ -1,8 +1,8 @@
 header {
   position: relative;
-  position: fixed;
+  position: sticky;
   width: 100%;
-  /* top: -44px; */
+  top: -44px;
   z-index: 99;
   transition: top 0.2s ease-in-out;
 }
